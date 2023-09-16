@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.lab02_iot_20181650.service.UserService;
 
@@ -16,6 +17,7 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        Toast.makeText(this, "Usted se encuentra en la vista de Inicio", Toast.LENGTH_SHORT).show();
 
         userService = new Retrofit.Builder()
                 .baseUrl("https://randomuser.me")
