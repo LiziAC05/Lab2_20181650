@@ -49,47 +49,38 @@
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <EditText
-            android:id="@+id/editTxtName"
+        <AutoCompleteTextView
+            android:id="@+id/editTxtFirst"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Nombre" />
+            android:layout_height="wrap_content" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="28dp" />
 
-        <EditText
-            android:id="@+id/editTextLast"
+        <AutoCompleteTextView
+            android:id="@+id/editTxtLast"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Apellido" />
+            android:layout_height="wrap_content" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="32dp" />
 
-        <EditText
-            android:id="@+id/editTextEmail"
+        <AutoCompleteTextView
+            android:id="@+id/editEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:layout_height="wrap_content" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="31dp" />
 
-        <EditText
-            android:id="@+id/editTextPassword"
+        <AutoCompleteTextView
+            android:id="@+id/editPasswd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <TextView
@@ -103,4 +94,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

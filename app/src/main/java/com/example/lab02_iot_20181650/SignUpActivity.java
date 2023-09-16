@@ -2,7 +2,13 @@ package com.example.lab02_iot_20181650;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.lab02_iot_20181650.databinding.ActivityMainBinding;
@@ -22,6 +28,12 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        Button btnCreate = findViewById(R.id.btnCreate);
+        btnCreate.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpActivity.this, StartActivity.class);
+            startActivity(intent);
+            finish();
+        });
         Toast.makeText(this, "Usted se encuentra en la vista de Registro", Toast.LENGTH_SHORT).show();
         userService = new Retrofit.Builder()
                 .baseUrl("https://randomuser.me")
@@ -29,19 +41,6 @@ public class SignUpActivity extends AppCompatActivity {
                 .build()
                 .create(UserService.class);
 
-        userService.getResults().enqueue(new Callback<Results>() {
-            @Override
-            public void onResponse(Call<Results> call, Response<Results> response) {
-                if(response.isSuccessful()){
-                    Results results = response.body();
-                    results.getEmail();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Results> call, Throwable t) {
-
-            }
-        });
     }
 }
