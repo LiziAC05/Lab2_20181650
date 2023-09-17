@@ -15,7 +15,6 @@ import java.util.TimerTask;
 
 public class CronometroActivity extends AppCompatActivity {
     boolean timeStarted = false;
-    Button btnStart;
     TextView timerText;
     Timer timer;
     TimerTask timerTask;
@@ -26,11 +25,50 @@ public class CronometroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cronometro);
         Toast.makeText(this, "Usted se encuentra en la vista Cronómetro", Toast.LENGTH_SHORT).show();
         timerText = (TextView) findViewById(R.id.timerText);
-        btnStart = (Button) findViewById(R.id.btnIniciar);
-        Button btnStop = (Button) findViewById(R.id.btnParar);
-        Button btnContinue = (Button) findViewById(R.id.btnRetomar);
-        Button btnReset = (Button) findViewById(+R.id.btnLimpiar);
+        Button btnStart = findViewById(R.id.btnIniciar);
+        btnStart.setOnClickListener(view -> {
+            timeStarted = true;
+            timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(() -> {
+                        time++;
+                        timerText.setText(getTimerText());
+                    });
+                }
+            };
+            timer.scheduleAtFixedRate(timerTask, 0, 1000);
+        });
+        Button btnStop = findViewById(R.id.btnParar);
+        btnStop.setOnClickListener(view -> {
+            timeStarted = false;
+            timerTask.cancel();
+        });
+        Button btnContinue = findViewById(R.id.btnRetomar);
+        btnContinue.setOnClickListener(view -> {
+            timeStarted = true;
+            iniciarCuenta();
+        });
+        Button btnReset = findViewById(+R.id.btnLimpiar);
+        btnReset.setOnClickListener(view -> {
+            AlertDialog.Builder limpiar = new AlertDialog.Builder(this);
+            limpiar.setTitle("Limpiar la Cuenta");
+            limpiar.setMessage("¿Desea limpiar e iniciar una nueva cuenta?");
+            limpiar.setPositiveButton("Limpiar Cuenta", (dialogInterface, i) -> {
+                if (timerTask != null) {
+                    timerTask.cancel();
+                    time = 0.0;
+                    timeStarted = false;
+                    timerText.setText(formatTime(0, 0, 0));
+                }
+            });
+            limpiar.setNeutralButton("Cancelar", (dialogInterface, i) -> {
 
+            });
+            limpiar.show();
+        });
+
+        timer = new Timer();
     }
 
     public  void iniciarCuenta(){
@@ -38,42 +76,15 @@ public class CronometroActivity extends AppCompatActivity {
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        time++;
-                        timerText.setText(getTimerText());
-                    }
+                runOnUiThread(() -> {
+                    time++;
+                    timerText.setText(getTimerText());
                 });
             }
         };
         timer.scheduleAtFixedRate(timerTask, 0, 1000);
     }
 
-    public void pararCuenta(){
-        timerTask.cancel();
-    }
-
-    public void retomarCuenta(){
-
-    }
-
-    public void limpiarCuenta(){
-        AlertDialog.Builder limpiar = new AlertDialog.Builder(this);
-        limpiar.setTitle("Limpiar la Cuenta");
-        limpiar.setMessage("¿Desea limpiar e iniciar una nueva cuenta?");
-        limpiar.setPositiveButton("Limpiar Cuenta", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (timerTask != null){
-                    timerTask.cancel();
-                    time = 0.0;
-                    timeStarted = false;
-                    timerText.setText(formatTime(0,0,0));
-                }
-            }
-        });
-    }
 
     private String getTimerText(){
         int rounded = (int) Math.round(time);

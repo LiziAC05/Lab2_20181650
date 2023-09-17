@@ -35,33 +35,29 @@
             android:id="@+id/btnIniciar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar Cuenta"
-            android:onClick="iniciarCuenta"/>
+            android:text="Iniciar Cuenta" />
 
         <Button
             android:id="@+id/btnParar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Parar Cuenta"
-            android:onClick="pararCuenta"/>
+            android:text="Parar Cuenta" />
 
         <Button
             android:id="@+id/btnRetomar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Retomar Cuenta"
-            android:onClick="retomarCuenta"/>
+            android:text="Retomar Cuenta" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="188dp" />
+            android:layout_height="97dp" />
 
         <Button
             android:id="@+id/btnLimpiar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Limpiar"
-            android:onClick="limpiarCuenta"/>
+            android:text="Limpiar" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
