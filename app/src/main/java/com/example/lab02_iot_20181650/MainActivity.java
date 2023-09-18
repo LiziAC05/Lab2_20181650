@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.lab02_iot_20181650.databinding.ActivityMainBinding;
 import com.example.lab02_iot_20181650.dto.Results;
-import com.example.lab02_iot_20181650.service.UserService;
+import com.example.lab02_iot_20181650.service.RandomUserService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
-    UserService userService;
     private ActivityMainBinding binding;
 
     @Override
@@ -42,27 +41,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No está conectado a Internet", Toast.LENGTH_SHORT).show();
         }
-
-        userService = new Retrofit.Builder()
-                .baseUrl("https://randomuser.me")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(UserService.class);
-        Log.d("msg", "LISTO");
-        /*userService.getResults().enqueue(new Callback<Results>() {
-            @Override
-            public void onResponse(Call<Results> call, Response<Results> response) {
-                if(response.isSuccessful()){
-                    Results results = response.body();
-                    Log.d("email", results.getEmail());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Results> call, Throwable t) {
-
-            }
-        });*/
 
     }
 

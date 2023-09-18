@@ -9,13 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.lab02_iot_20181650.service.UserService;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class StartActivity extends AppCompatActivity {
-    UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +33,5 @@ public class StartActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        userService = new Retrofit.Builder()
-                .baseUrl("https://randomuser.me")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(UserService.class);
     }
 }
